@@ -143,6 +143,20 @@ Cron:
   Mode: Every Day
   Time: 9:00 AM
 ```
+Following this video will help you integrate your Google Sheets API with n8n, allowing the workflow to read/write your content queue seamlessly.
+
+📺 Video Guide: Google Sheets API Setup
+
+For beginners who are new to Google Cloud APIs, this video shows:
+
+- How to enable Google Sheets API
+- How to create OAuth 2.0 credentials
+- Where to find your Client ID and Client Secret
+- How to connect your Google account with n8n
+
+🎥 Watch here: Google Sheets API Setup Guide
+
+[![Google Sheets API Setup](https://img.youtube.com/vi/CdssoZAslq0/0.jpg)](https://www.youtube.com/watch?v=CdssoZAslq0)
 
 ---
 
@@ -151,9 +165,3 @@ Cron:
 * Docker ensures **consistent environment** for n8n → avoids dependency issues.
 * Gemini API handles **AI content generation**, so make sure your key is active and has access.
 * Google Drive & Sheets API must be **enabled** in your Google Cloud project, otherwise workflow nodes won’t connect.
-
----
-
-If you want, I can now make a **ready-to-publish Markdown README.md** with **Docker commands, API activation steps, and n8n setup screenshots** for a **fully professional GitHub project**.
-
-Do you want me to do that next?
