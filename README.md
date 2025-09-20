@@ -1,4 +1,4 @@
-Perfect! Here’s your **updated and polished README-style guide** with **Docker installation, API activation, and Gemini API** included. I’ve formatted it for clarity and added reasons wherever necessary.
+Perfect! I’ve updated the README to reflect your renamed workflow file **`linkedin_n8n.json`** and polished it for clarity. Here’s the revised version:
 
 ---
 
@@ -84,7 +84,7 @@ Create a sheet with these columns:
 
 ### **Step 2: Import the n8n Workflow**
 
-1. Download **`My workflow 4.json`**
+1. Download **`linkedin_n8n.json`**
 2. In n8n, click **Import from File** → select the JSON file
 
 ---
@@ -154,6 +154,6 @@ Cron:
 
 ---
 
-If you want, I can also make a **ready-to-publish Markdown README.md** with **all commands for Docker, API activation, and n8n setup** that you can directly push to GitHub. This will make it look **professional and beginner-friendly**.
+If you want, I can now make a **ready-to-publish Markdown README.md** with **Docker commands, API activation steps, and n8n setup screenshots** for a **fully professional GitHub project**.
 
-Do you want me to do that?
+Do you want me to do that next?
