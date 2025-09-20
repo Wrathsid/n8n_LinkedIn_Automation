@@ -1,0 +1,266 @@
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        492
+      ],
+      "id": "78e3cb3f-ed1c-4239-9257-0589cdecf88d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1KkK2nT7BSswCBQyYzG5VjtaXZHUyMJfgYLG_qTuFoOo",
+          "mode": "list",
+          "cachedResultName": "LinkedIn",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KkK2nT7BSswCBQyYzG5VjtaXZHUyMJfgYLG_qTuFoOo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KkK2nT7BSswCBQyYzG5VjtaXZHUyMJfgYLG_qTuFoOo/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Status ",
+              "lookupValue": "Not Posted"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": true
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -448,
+        492
+      ],
+      "id": "c1d58b0c-4a66-4fdc-8bf3-e843f1e478a7",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VlkhqGK40UfaDSXI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Write a short LinkedIn post about the topic: {{ $json.Topic }}.\n\nGuidelines:\n- Start with a strong hook (1–2 sentences that grab attention).  \n- Share an insightful perspective or a practical takeaway in simple language.  \n- Keep it concise (300-500 words).  \n- End with a natural call-to-action (like inviting comments, sharing thoughts, or connecting).  \n- Use a conversational, human tone (avoid sounding like AI).  \n- Do not use hashtags unless they add real value.  \n- Avoid overused LinkedIn buzzwords (like “synergy”, “game-changer”\n\n- Add only 2-3 emojis if required\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        240
+      ],
+      "id": "df5958e1-321b-432d-ac98-b6e1c8b91156",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -152,
+        464
+      ],
+      "id": "7b739b8d-7449-4dd4-a827-27849d8f8213",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "xYBKfO3DPzenRKU0",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "person": "8OJgCDsud3",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        128,
+        344
+      ],
+      "id": "ed62e3a1-66b9-422a-9653-37e6e5ddcd28",
+      "name": "Create a post",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "LgOhjQ3D7mHznFh3",
+          "name": "LinkedIn account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1KkK2nT7BSswCBQyYzG5VjtaXZHUyMJfgYLG_qTuFoOo",
+          "mode": "list",
+          "cachedResultName": "LinkedIn",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KkK2nT7BSswCBQyYzG5VjtaXZHUyMJfgYLG_qTuFoOo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1KkK2nT7BSswCBQyYzG5VjtaXZHUyMJfgYLG_qTuFoOo/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Topic": "={{ $json.Topic }}",
+            "Status ": "Posted",
+            "Posted At": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "Topic"
+          ],
+          "schema": [
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status ",
+              "displayName": "Status ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Posted At",
+              "displayName": "Posted At",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        640
+      ],
+      "id": "7a5cfd8e-fa2e-410d-86eb-806cce49701b",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VlkhqGK40UfaDSXI",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e036f467-e727-486d-8232-81675268fa45",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a14a592d451928e0cfc69e32184a3f18a8ab358efd407c5e17b6f038a44f88dd"
+  },
+  "id": "4cHkRAnQ7jsmM5kW",
+  "tags": []
+}
